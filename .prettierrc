@@ -1,0 +1,26 @@
+{
+  "bracketSpacing": false,
+  "arrowParens": "avoid",
+  "endOfLine": "auto",
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100,
+  "bracketSameLine": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^(fs)$",
+    "^(react/(.*)$)|^(react$)",
+    "^(react-native/(.*)$)|^(react-native$)",
+    "^(expo/(.*)$)|^(expo$)",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^../",
+    "^./",
+    "^[.]$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true
+}
