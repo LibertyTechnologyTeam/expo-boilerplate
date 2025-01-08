@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable no-console */
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { green, cyan } = require('chalk');
-const gradient = require('gradient-string');
+import {cyan} from 'chalk'
+import gradient from 'gradient-string'
 
 const logo = [
   '                                                                                  ',
@@ -23,49 +20,49 @@ const logo = [
   '                ║          ╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝                 ║    ',
   '                ║                                                           ║    ',
   '                ╚═══════════════════════════════════════════════════════════╝    ',
-  '                                                                                   '
-];
+  '                                                                                   ',
+]
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 module.exports = {
   apply: async () => {
     // Clear console
-    console.clear();
+    console.clear()
 
     // Gradient colors
     const colors = {
       start: '#00ff00',
       middle: '#00cc00',
-      end: '#009900'
-    };
+      end: '#009900',
+    }
 
     // Print logo with typing effect
     for (let i = 0; i < logo.length; i++) {
-      process.stdout.write(gradient(colors.start, colors.end)(logo[i] + '\n'));
-      await sleep(50); // Adjust speed here
+      process.stdout.write(gradient(colors.start, colors.end)(logo[i] + '\n'))
+      await sleep(50) // Adjust speed here
     }
 
     // Add shine effect
     for (let i = 0; i < 3; i++) {
-      await sleep(200);
-      console.clear();
+      await sleep(200)
+      console.clear()
       logo.forEach((line, index) => {
         if (index === i * 2) {
-          console.log(cyan(line));
+          console.log(cyan(line))
         } else {
-          console.log(gradient(colors.start, colors.end)(line));
+          console.log(gradient(colors.start, colors.end)(line))
         }
-      });
+      })
     }
 
     // Final display
-    await sleep(200);
-    console.clear();
-    console.log(gradient(colors.start, colors.end)(logo.join('\n')));
+    await sleep(200)
+    console.clear()
+    console.log(gradient(colors.start, colors.end)(logo.join('\n')))
 
-    return Promise.resolve();
+    return Promise.resolve()
   },
   name: 'printSuccess',
-  promptsOptions: null
-};
+  promptsOptions: null,
+}
