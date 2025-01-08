@@ -31,7 +31,6 @@ const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '
 const gradientColors = [
   chalk.greenBright,
   chalk.green,
-  chalk.green,  
 ];
 
 // Helper function để lấy màu gradient
