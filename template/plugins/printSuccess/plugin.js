@@ -1,5 +1,5 @@
-const chalk = require('chalk');
-const { cyan, blue, magenta } = chalk;
+const {cyan, blue, magenta} = require('chalk')
+const gradient = require('gradient-string')
 
 const logo = [
   '                                                                                  ',
@@ -23,63 +23,45 @@ const logo = [
   '                                                                                   ',
 ]
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
-
-// Tạo gradient colors array
-const gradientColors = [
-  chalk.greenBright,
-  chalk.green,
-];
-
-// Helper function để lấy màu gradient
-const getGradientColor = (index, total) => {
-  const position = Math.floor((index / total) * (gradientColors.length - 1));
-  return gradientColors[position];
-};
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 module.exports = {
   apply: async () => {
-    console.clear();
+    // Clear console
+    console.clear()
 
-    // Wave animation với gradient
-    for (let wave = 0; wave < 2; wave++) {
-      for (let frame = 0; frame < frames.length; frame++) {
-        console.clear();
-        logo.forEach((line, i) => {
-          const color = getGradientColor(i, logo.length);
-          const frameIndex = (frame + i * 2) % frames.length;
-          process.stdout.write(color(frames[frameIndex] + ' ' + line + '\n'));
-        });
-        await sleep(80);
-      }
-    }
-
-    // Final reveal với gradient fade effect
-    console.clear();
+     const colors = {
+      start: '#00ff00',
+      middle: '#00cc00',
+      end: '#009900'
+    };
+    
+    // Print logo with typing effect
     for (let i = 0; i < logo.length; i++) {
-      const currentLines = logo.slice(0, i + 1);
-      const remainingSpaces = Array(logo.length - i - 1).fill('');
-      
-      console.clear();
-      currentLines.forEach((line, lineIndex) => {
-        const color = getGradientColor(lineIndex, currentLines.length);
-        console.log(color(line));
-      });
-      console.log(remainingSpaces.join('\n'));
-      await sleep(30);
+      process.stdout.write(gradient(colors.start, colors.end)(logo[i] + '\n'))
+      await sleep(200) // Adjust speed here
     }
 
-    // Final static display với full gradient
-    console.clear();
-    logo.forEach((line, i) => {
-      const color = getGradientColor(i, logo.length);
-      console.log(color.bold(line));
-    });
+    // Add shine effect
+    for (let i = 0; i < 3; i++) {
+      await sleep(200)
+      console.clear()
+      logo.forEach((line, index) => {
+        if (index === i * 2) {
+          console.log(cyan(line))
+        } else {
+          console.log(gradient(colors.start, colors.end)(line))
+        }
+      })
+    }
 
-    return Promise.resolve();
+    // Final display
+    await sleep(200)
+    console.clear()
+    console.log(gradient(colors.start, colors.end)(logo.join('\n')))
+
+    return Promise.resolve()
   },
   name: 'printSuccess',
-  promptsOptions: null
-};
+  promptsOptions: null,
+}
