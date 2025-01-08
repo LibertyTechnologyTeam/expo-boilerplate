@@ -1,7 +1,29 @@
+const fs = require('fs');
+const path = require('path');
+
 module.exports = {
   apply: async (value, response) => {
     if (value) {
-      process.env.BUNDLE_ID = value;
+      // Đường dẫn tới file app.config.js
+      const configPath = path.join(process.cwd(), 'app.config.js');
+      
+      try {
+        // Đọc nội dung file
+        let content = fs.readFileSync(configPath, 'utf8');
+        
+        // Thay thế bundle ID cũ bằng giá trị mới
+        content = content.replace(
+          /const bundleId = ['"]([^'"]+)['"]/,
+          `const bundleId = '${value}'`
+        );
+        
+        // Ghi lại file
+        fs.writeFileSync(configPath, content, 'utf8');
+        
+        console.log('✅ Bundle identifier updated successfully');
+      } catch (error) {
+        console.error('❌ Failed to update bundle identifier:', error);
+      }
     }
     return Promise.resolve();
   },

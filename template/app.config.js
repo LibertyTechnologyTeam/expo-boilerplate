@@ -4,7 +4,7 @@ const isProd = variant === 'prod'
 const isStg = variant === 'stg'
 
 const name = 'expo-boilerplate'
-const bundleId = process.env.BUNDLE_ID || 'com.liberty.expo'
+const bundleId = 'com.liberty.expo'
 
 const bundleSuffix = isProd ? '' : `.${variant}`
 const bundleIdentifier = `${bundleId}${bundleSuffix}`
