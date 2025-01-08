@@ -1822,13 +1822,6 @@
   dependencies:
     firebase "10.13.2"
 
-"@react-native-firebase/auth@21.6.2":
-  version "21.6.2"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.6.2.tgz#b7cc5d162c0ffe466a6e4c9cb550474fb1488a60"
-  integrity sha512-/U8V7B063ShawbEomgq9fzl8mk4eJfWP+f3rxRrIjVAl6AQTIWBbLZ2qFThQpmD5X5YKHX2z1NnZ+DVNVQHDjA==
-  dependencies:
-    plist "^3.1.0"
-
 "@react-native-firebase/crashlytics@21.6.2":
   version "21.6.2"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-21.6.2.tgz#248e37490b409d349521f00b48ac6a1ca70ff97b"
@@ -2141,6 +2134,11 @@
   version "2.0.46"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.46.tgz#381daaca1360ff8a7c8dff63f32e69745b9fb1e1"
   integrity sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==
+
+"@types/i18n-js@^3.8.9":
+  version "3.8.9"
+  resolved "https://registry.yarnpkg.com/@types/i18n-js/-/i18n-js-3.8.9.tgz#074d1389539d2db992e6afd7eb379aa02929ef93"
+  integrity sha512-bSxgya4x5O+x+QhfCGckiDDE+17XGPp1TNBgBA/vfF5EwdiZC70F4cKG5QK2v44+v62oY7/t/InreRhxskulcA==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.6"
@@ -6186,7 +6184,7 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-plist@^3.0.5, plist@^3.1.0:
+plist@^3.0.5:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.1.0.tgz#797a516a93e62f5bde55e0b9cc9c967f860893c9"
   integrity sha512-uysumyrvkUX0rX/dEVqt8gC3sTBzd4zoWfLeS29nb53imdaXVvLINYXTI2GNqzaMuvacNx4uJQ8+b3zXR0pkgQ==
