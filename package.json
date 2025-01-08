@@ -26,7 +26,7 @@
     "expo"
   ],
   "dependencies": {
-    "kleur": "^4.1.4",
+    "chalk": "^5.4.1",
     "prompts": "^2.4.1"
   }
 }
