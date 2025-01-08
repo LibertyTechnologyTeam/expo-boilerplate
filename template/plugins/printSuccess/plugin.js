@@ -29,9 +29,9 @@ const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '
 
 // Tạo gradient colors array
 const gradientColors = [
-  cyan,
-  chalk.bgCyan,
-  chalk.cyanBright,
+  chalk.greenBright,
+  chalk.green,
+  chalk.green,  
 ];
 
 // Helper function để lấy màu gradient
