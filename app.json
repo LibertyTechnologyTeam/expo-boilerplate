@@ -21,6 +21,43 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "plugins": [
+      "expo-localization",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/crashlytics",
+      "@react-native-firebase/messaging",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0",
+            "kotlinVersion": "1.8.0",
+            "extraMavenRepos": [
+              "../../node_modules/@notifee/react-native/android/libs"
+            ],
+            "compileOptions": {
+              "sourceCompatibility": "1.8",
+              "targetCompatibility": "1.8",
+              "compilerArgs": [
+                "-Xlint:-deprecation",
+                "-Xlint:-unchecked"
+              ]
+            },
+            "lintOptions": {
+              "abortOnError": false,
+              "disable": [
+                "Deprecation",
+                "Unchecked"
+              ]
+            }
+          },
+          "ios": {}
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }
