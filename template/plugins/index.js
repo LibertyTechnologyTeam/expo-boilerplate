@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// eslint-disable-next-line import/no-extraneous-dependencies
 const prompts = require('prompts');
-const typescriptPlugin = require('./compile-js');
-const printSuccessPlugin = require('./printSuccess');
+const bundleIdPlugin = require('./bundle-id/plugin');
+const printSuccessPlugin = require('./printSuccess/plugin');
 
 // List of plugin to apply (ordered)
-const plugins = [typescriptPlugin, printSuccessPlugin];
+const plugins = [bundleIdPlugin, printSuccessPlugin];
 
 /**
  * @typedef {Object} Plugin
