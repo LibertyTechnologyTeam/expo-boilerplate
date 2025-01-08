@@ -4,9 +4,21 @@ module.exports = {
     process.env.SKIP_INSTALL = 'true';
     process.env.SKIP_GIT_INIT = 'true';
     process.env.INSTALL_PODS = 'false';
+    process.env.SKIP_DEPENDENCY_INSTALLATION = 'true';
+    
+    // Override các prompts
+    if (process.env.npm_config_user_agent) {
+      process.env.npm_config_yes = 'true'; // Auto yes cho tất cả prompts
+    }
     
     return Promise.resolve();
   },
   name: 'skipSteps',
-  promptsOptions: null
-}; 
+  // Override các prompts options
+  promptsOptions: {
+    type: 'text',
+    name: 'skip',
+    message: '',
+    initial: 'yes'
+  }
+};
