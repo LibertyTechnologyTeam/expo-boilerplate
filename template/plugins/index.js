@@ -2,9 +2,14 @@
 const prompts = require('prompts');
 const bundleIdPlugin = require('./bundle-id/plugin');
 const printSuccessPlugin = require('./printSuccess/plugin');
+const skipStepsPlugin = require('./skip-steps/plugin');
 
 // List of plugin to apply (ordered)
-const plugins = [bundleIdPlugin, printSuccessPlugin];
+const plugins = [
+  skipStepsPlugin,
+  bundleIdPlugin,
+  printSuccessPlugin
+];
 
 /**
  * @typedef {Object} Plugin
