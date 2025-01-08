@@ -1,4 +1,4 @@
-import {cyan} from 'chalk'
+import chalk from 'chalk'
 import gradient from 'gradient-string'
 
 const logo = [
@@ -49,7 +49,7 @@ module.exports = {
       console.clear()
       logo.forEach((line, index) => {
         if (index === i * 2) {
-          console.log(cyan(line))
+          console.log(chalk.cyan(line))
         } else {
           console.log(gradient(colors.start, colors.end)(line))
         }
