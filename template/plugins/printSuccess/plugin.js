@@ -1,5 +1,5 @@
-const chalk = require('chalk');
-const { cyan, blue, magenta } = chalk;
+const chalk = require('chalk')
+const {cyan, blue, magenta} = chalk
 
 const logo = [
   '                                                                                  ',
@@ -23,67 +23,60 @@ const logo = [
   '                                                                                   ',
 ]
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
 
 // Tạo gradient colors array
-const gradientColors = [
-  cyan,
-  chalk.cyanBright,
-  blue,
-  chalk.blueBright,
-  magenta,
-  chalk.magentaBright
-];
+const gradientColors = ['#00ff00', '#00cc00', '#009900']
 
 // Helper function để lấy màu gradient
 const getGradientColor = (index, total) => {
-  const position = Math.floor((index / total) * (gradientColors.length - 1));
-  return gradientColors[position];
-};
+  const position = Math.floor((index / total) * (gradientColors.length - 1))
+  return gradientColors[position]
+}
 
 module.exports = {
   apply: async () => {
-    console.clear();
+    console.clear()
 
     // Wave animation với gradient
     for (let wave = 0; wave < 2; wave++) {
       for (let frame = 0; frame < frames.length; frame++) {
-        console.clear();
+        console.clear()
         logo.forEach((line, i) => {
-          const color = getGradientColor(i, logo.length);
-          const frameIndex = (frame + i * 2) % frames.length;
-          process.stdout.write(color(frames[frameIndex] + ' ' + line + '\n'));
-        });
-        await sleep(80);
+          const color = getGradientColor(i, logo.length)
+          const frameIndex = (frame + i * 2) % frames.length
+          process.stdout.write(color(frames[frameIndex] + ' ' + line + '\n'))
+        })
+        await sleep(80)
       }
     }
 
     // Final reveal với gradient fade effect
-    console.clear();
+    console.clear()
     for (let i = 0; i < logo.length; i++) {
-      const currentLines = logo.slice(0, i + 1);
-      const remainingSpaces = Array(logo.length - i - 1).fill('');
-      
-      console.clear();
+      const currentLines = logo.slice(0, i + 1)
+      const remainingSpaces = Array(logo.length - i - 1).fill('')
+
+      console.clear()
       currentLines.forEach((line, lineIndex) => {
-        const color = getGradientColor(lineIndex, currentLines.length);
-        console.log(color(line));
-      });
-      console.log(remainingSpaces.join('\n'));
-      await sleep(30);
+        const color = getGradientColor(lineIndex, currentLines.length)
+        console.log(color(line))
+      })
+      console.log(remainingSpaces.join('\n'))
+      await sleep(30)
     }
 
     // Final static display với full gradient
-    console.clear();
+    console.clear()
     logo.forEach((line, i) => {
-      const color = getGradientColor(i, logo.length);
-      console.log(color.bold(line));
-    });
+      const color = getGradientColor(i, logo.length)
+      console.log(color.bold(line))
+    })
 
-    return Promise.resolve();
+    return Promise.resolve()
   },
   name: 'printSuccess',
-  promptsOptions: null
-};
+  promptsOptions: null,
+}
