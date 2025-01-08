@@ -23,45 +23,44 @@ const logo = [
   '                                                                                   ',
 ]
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+
 
 module.exports = {
   apply: async () => {
-    // Clear console
-    console.clear()
+    console.clear();
 
-    const colors = {
-      start: '#00ff00',
-      middle: '#00cc00',
-      end: '#009900'
-    };
-    
-    // Print logo with typing effect
+    // Wave animation
+    for (let wave = 0; wave < 2; wave++) {
+      for (let frame = 0; frame < frames.length; frame++) {
+        console.clear();
+        logo.forEach((line, i) => {
+          const delay = i * 2;
+          const frameIndex = (frame + delay) % frames.length;
+          process.stdout.write(cyan(frames[frameIndex] + ' ' + line + '\n'));
+        });
+        await sleep(80);
+      }
+    }
+
+    // Final reveal with fade effect
+    console.clear();
     for (let i = 0; i < logo.length; i++) {
-      process.stdout.write(gradient(colors.start, colors.end)(logo[i] + '\n'))
-      await sleep(200) // Adjust speed here
+      const currentLines = logo.slice(0, i + 1);
+      const remainingSpaces = Array(logo.length - i - 1).fill('');
+      console.clear();
+      console.log(blue(currentLines.join('\n') + '\n' + remainingSpaces.join('\n')));
+      await sleep(30);
     }
 
-    // Add shine effect
-    for (let i = 0; i < 3; i++) {
-      await sleep(200)
-      console.clear()
-      logo.forEach((line, index) => {
-        if (index === i * 2) {
-          console.log(cyan(line))
-        } else {
-          console.log(gradient(colors.start, colors.end)(line))
-        }
-      })
-    }
+    // Final static display
+    console.clear();
+    console.log(cyan.bold(logo.join('\n')));
 
-    // Final display
-    await sleep(200)
-    console.clear()
-    console.log(gradient(colors.start, colors.end)(logo.join('\n')))
-
-    return Promise.resolve()
+    return Promise.resolve();
   },
   name: 'printSuccess',
-  promptsOptions: null,
-}
+  promptsOptions: null
+};
