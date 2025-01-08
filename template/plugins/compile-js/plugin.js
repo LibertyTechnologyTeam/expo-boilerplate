@@ -76,8 +76,6 @@ module.exports = {
 
         try {
           console.log('🖼️  Copying assets...');
-          execSync('cp -R src/theme/assets/images js/src/theme/assets/images');
-
           console.log('♻️  Replacing source...');
           execSync('rm -rf src', { stdio: 'pipe' });
           execSync('cp -R js/src ./src', { stdio: 'pipe' });
