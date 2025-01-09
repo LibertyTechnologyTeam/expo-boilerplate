@@ -3,8 +3,8 @@ const variant = env.VARIANT
 const isProd = variant === 'prod'
 const isStg = variant === 'stg'
 
-const name = 'ExpoBoilerplate'
-const bundleId = 'com.bundle.identifier'
+const name = 'PROJECT_NAME'
+const bundleId = 'BUNDLE_ID'
 
 const bundleSuffix = isProd ? '' : `.${variant}`
 const bundleIdentifier = `${bundleId}${bundleSuffix}`
@@ -40,6 +40,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier,
+      appleTeamId: 'APPLE_TEAM_ID',
       infoPlist: {
         CFBundleDisplayName: appName,
       },

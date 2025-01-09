@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const prompts = require('prompts');
-const bundleIdPlugin = require('./bundle-id/plugin');
-const printSuccessPlugin = require('./printSuccess/plugin');
+const prompts = require('prompts')
+const bundleIdPlugin = require('./bundle-id/plugin')
+const printSuccessPlugin = require('./printSuccess/plugin')
+const appleAuthPlugin = require('./apple-auth/plugin')
 
 // List of plugin to apply (ordered)
-const plugins = [
-  bundleIdPlugin,
-  printSuccessPlugin
-];
+const plugins = [bundleIdPlugin, appleAuthPlugin, printSuccessPlugin]
 
 /**
  * @typedef {Object} Plugin
@@ -24,13 +21,18 @@ const plugins = [
  * @return {Promise<*>}
  */
 async function applyPlugin(name, plugin, response) {
-  if (!plugin.promptsOptions) {
-    await plugin.apply(null, response);
-    return { [name]: null, ...response };
+  try {
+    if (!plugin.promptsOptions) {
+      await plugin.apply(null, response)
+      return {[name]: null, ...response}
+    }
+    const {value} = await prompts({...plugin.promptsOptions, name: 'value'})
+
+    await plugin.apply(value, response)
+    return {[name]: value, ...response}
+  } catch (error) {
+    throw error
   }
-  const { value } = await prompts({ ...plugin.promptsOptions, name: 'value' });
-  await plugin.apply(value, response);
-  return { [name]: value, ...response };
 }
 
 module.exports = {
@@ -40,9 +42,8 @@ module.exports = {
    */
   async applyPlugins() {
     return plugins.reduce(
-      (acc, { name, ...plugin }) =>
-        acc.then((response) => applyPlugin(name, plugin, response)),
-      Promise.resolve({}),
-    );
+      (acc, {name, ...plugin}) => acc.then(response => applyPlugin(name, plugin, response)),
+      Promise.resolve({})
+    )
   },
-};
+}

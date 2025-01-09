@@ -26,8 +26,9 @@
     "expo"
   ],
   "dependencies": {
-    "gradient-string": "2.0.2",
+    "@expo/apple-utils": "^2.1.6",
     "chalk": "4.1.2",
-    "prompts": "^2.4.1"
+    "gradient-string": "2.0.2",
+    "prompts": "^2.4.2"
   }
 }

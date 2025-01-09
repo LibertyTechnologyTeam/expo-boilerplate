@@ -1,32 +1,33 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
 module.exports = {
   apply: async (value, response) => {
-    // Lấy tên project từ process.argv hoặc từ thư mục hiện tại
-    const projectName = process.argv[2] || path.basename(process.cwd());
-    
+    // get project name from process.argv or current directory
+    const projectName = process.argv[2] || path.basename(process.cwd())
+
     if (projectName) {
-      const configPath = path.join(process.cwd(), 'app.config.js');
-      
+      const configPaths = [
+        path.join(process.cwd(), 'app.config.js'),
+        path.join(process.cwd(), 'fastlane', 'Fastfile'),
+        path.join(process.cwd(), 'fastlane', 'Matchfile'),
+      ]
+
       try {
-        let content = fs.readFileSync(configPath, 'utf8');
-        
-        // Thay thế app name cũ bằng projectName từ CLI
-        content = content.replace(
-          /const name = ['"]([^'"]+)['"]/,
-          `const name = '${projectName}'`
-        );
-        
-        fs.writeFileSync(configPath, content, 'utf8');
-        console.log('✅ App name updated to:', projectName);
+        configPaths.forEach(configPath => {
+          if (fs.existsSync(configPath)) {
+            let content = fs.readFileSync(configPath, 'utf8')
+            content = content.replace(/PROJECT_NAME/g, projectName)
+            fs.writeFileSync(configPath, content, 'utf8')
+          }
+        })
       } catch (error) {
-        console.error('❌ Failed to update app name:', error);
+        throw error
       }
     }
-    return Promise.resolve();
+    return Promise.resolve()
   },
   name: 'appName',
   // Không cần promptsOptions vì lấy tên từ CLI
-  promptsOptions: null
-}; 
+  promptsOptions: null,
+}

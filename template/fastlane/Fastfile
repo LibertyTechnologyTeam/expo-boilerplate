@@ -1,0 +1,222 @@
+opt_out_usage
+app_version = ENV["APP_VERSION"]
+app_build_number = ENV["APP_BUILD_NUMBER"]
+
+before_all do |lane, options|
+  ENV["MATCH_KEYCHAIN_NAME"] = "github-action"
+  ENV["MATCH_KEYCHAIN_PASSWORD"] = "Aa123@123"
+  ENV["MATCH_PASSWORD"] = "Aa123@123"
+  ENV["MATCH_GIT_PRIVATE_KEY"] = ".github/data/key/itcarz"
+
+  if ENV["APP_VARIANT"] == "stg"
+    ENV["ANDROID_APP_ID"] = "BUNDLE_ID.stg"
+    ENV["IOS_APP_ID"] = "BUNDLE_ID.stg"
+    ENV["ENV_PROFILE_NAME"] = "match AppStore BUNDLE_ID.stg"
+    ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:b935357fdbb739e1b75034"
+  elsif ENV["APP_VARIANT"] == "prd"
+    ENV["ANDROID_APP_ID"] = "BUNDLE_ID"
+    ENV["IOS_APP_ID"] = "BUN"
+    ENV["ENV_PROFILE_NAME"] = "match AppStore BUN"
+    ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:527743bf151fce9cb75034"
+  else
+    ENV["ANDROID_APP_ID"] = "BUNDLE_ID.dev"
+    ENV["IOS_APP_ID"] = "BUN.dev"
+    ENV["ENV_PROFILE_NAME"] = "match AppStore BUN.dev"
+    ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:abbf052e8339877db75034"
+  end
+end
+
+platform :ios do
+  desc "Match"
+  lane :certificates do
+    # begin
+    #   # run only in seff host machine
+    #   delete_keychain(
+    #     name: ENV["MATCH_KEYCHAIN_NAME"],
+    #   )
+    # rescue => ex
+    #   UI.error(ex)
+    # end
+    create_keychain(
+      name: ENV["MATCH_KEYCHAIN_NAME"],
+      password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      add_to_search_list: true,
+    )
+    unlock_keychain(
+      path: ENV["MATCH_KEYCHAIN_NAME"],
+      password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      add_to_search_list: true,
+    )
+
+    match(
+      keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+      keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      type: "appstore",
+      git_url: "git@github.com:LibertyTechnologyTeam/fastlane-certificates.git",
+      git_branch: "influence",
+      storage_mode: "git",
+      app_identifier: [ENV["IOS_APP_ID"], "*"],
+      team_id: "APPLE_TEAM_ID",
+      readonly: true,
+    )
+  end
+
+  desc "Update setting"
+  lane :update_settings do
+    update_code_signing_settings(
+      path: "ios/PROJECT_NAME.xcodeproj",
+      use_automatic_signing: false,
+      team_id: "APPLE_TEAM_ID",
+      code_sign_identity: "iPhone Distribution",
+      profile_name: ENV["ENV_PROFILE_NAME"],
+      targets: "InNews",
+    )
+  end
+
+  desc "Update version and build number"
+  lane :update_version_and_build_number do
+    increment_version_number(
+      xcodeproj: "ios/PROJECT_NAME.xcodeproj",
+      version_number: app_version,
+    )
+    increment_build_number(
+      xcodeproj: "ios/PROJECT_NAME.xcodeproj",
+      build_number: app_build_number,
+    )
+  end
+
+  desc "Build ipa file"
+  lane :build_ipa do
+    xcodes(version: "16.1", select_for_current_build_only: true)
+    gym(
+      export_method: "app-store",
+      workspace: "ios/PROJECT_NAME.xcworkspace",
+      output_directory: "build/ios/ipa/",
+      silent: true,
+      suppress_xcode_output: true,
+      clean: true,
+      export_options: {
+        provisioningProfiles: {
+          ENV["IOS_APP_ID"] => ENV["ENV_PROFILE_NAME"],
+        },
+      },
+    )
+  end
+
+  desc "Push a new ipa build to testflight"
+  lane :deploy_ipa do
+    full_change_log = changelog_from_git_commits(
+      commits_count: 1,
+      pretty: "%s",
+      match_lightweight_tag: false,
+    )
+
+    change_log = full_change_log.split(": ", 2).last
+
+    upload_to_testflight(
+      changelog: change_log,
+      beta_app_description: change_log,
+      app_identifier: ENV["IOS_APP_ID"],
+      team_id: "126191713",
+      ipa: "build/ios/ipa/PROJECT_NAME.ipa",
+      distribute_external: true,
+      groups: ["external"],
+      reject_build_waiting_for_review: true,
+      notify_external_testers: true,
+      skip_waiting_for_build_processing: false,
+      api_key_path: ".github/data/key/deploy/innews/AuthKey_#{ENV["APP_VARIANT"]}.json",
+    )
+  end
+end
+
+platform :android do
+  desc "Update version and build number"
+  lane :update_version_and_build_number do
+    increment_version_name(
+      gradle_file_path: "android/app/build.gradle",
+      version_name: app_version,
+    )
+    increment_version_code(
+      gradle_file_path: "android/app/build.gradle",
+      version_code: app_build_number,
+    )
+  end
+
+  desc "Build apk"
+  lane :build_apk do
+    gradle(
+      # task: "clean assemble",
+      task: "assemble",
+      flags: "--quiet --warning-mode=none --console=plain",
+      build_type: "Release",
+      print_command: false,
+      project_dir: "android/",
+      properties: {
+        "android.injected.signing.store.file" => ENV["PWD"] + "/.github/data/localkey/keystore.jks",
+        "android.injected.signing.store.password" => "Aa123@123",
+        "android.injected.signing.key.alias" => "InfluenceNews",
+        "android.injected.signing.key.password" => "Aa123@123",
+      },
+    )
+    copy_artifacts(
+      target_path: "./build/android/",
+      artifacts: ["android/app/build/*"],
+    )
+    `rm -rf ../android/app/build`
+  end
+
+  desc "Build aab"
+  lane :build_aab do
+    gradle(
+      # task: "clean bundle",
+      task: "bundle",
+      flags: "--quiet --warning-mode=none --console=plain",
+      build_type: "Release",
+      print_command: false,
+      project_dir: "android/",
+      properties: {
+        "android.injected.signing.store.file" => ENV["PWD"] + "/.github/data/localkey/keystore.jks",
+        "android.injected.signing.store.password" => "Aa123@123",
+        "android.injected.signing.key.alias" => "LibertyTech",
+        "android.injected.signing.key.password" => "Aa123@123",
+      },
+    )
+    copy_artifacts(
+      target_path: "./build/android/",
+      artifacts: ["android/app/build/*"],
+    )
+    `rm -rf ../android/app/build`
+  end
+
+  desc "Submit a new apk build to firebase"
+  lane :deploy_apk do
+    change_log = changelog_from_git_commits(
+      commits_count: 1,
+      pretty: "%cd - %s",
+      match_lightweight_tag: false,
+    )
+
+    firebase_app_distribution(
+      app: ENV["ANDROID_MOBILESDK_APP_ID"],
+      apk_path: "build/android/outputs/apk/release/app-release.apk",
+      groups: "internal",
+      release_notes: change_log,
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+    )
+  end
+
+  desc "Submit a new aab build to playstore beta"
+  lane :deploy_aab do
+    upload_to_play_store(
+      json_key: ".github/data/key/deploy/innews/PlayStoreKey_#{ENV["APP_VARIANT"]}.json",
+      aab: "build/android/outputs/bundle/release/app-release.aab",
+      timeout: 600,
+      track: "internal", # beta, internal
+      release_status: "draft",
+      package_name: ENV["ANDROID_APP_ID"],
+    )
+  end
+end

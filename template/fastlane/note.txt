@@ -1,0 +1,26 @@
+com.influencenews.innews.dev
+
+Passphrase for Match storage: Aa123@123
+
+tuanngocptn@icloud.com
+
+fastlane match appstore -a com.influencenews.innews.dev,com.influencenews.innews.stg,com.influencenews.innews
+fastlane match development -a com.influencenews.innews.dev,com.influencenews.innews.stg,com.influencenews.innews
+
+fastlane sigh -app_identifier "com.influencenews.innews.dev" -cert_id "6PB3D778WV" -development false -force true
+fastlane sigh -app_identifier "com.influencenews.innews.dev" -cert_id "UN6QG6576U" -development true -force true
+
+fastlane sigh -app_identifier "com.influencenews.innews.dev" -cert_id "6PB3D778WV" -force true
+
+fastlane match development -app_identifier "com.influencenews.innews.dev" -verbose
+
+fastlane match appstore
+
+keytool -genkey -v -keystore release.keystore -alias InfluenceNews -keyalg RSA -keysize 4096 -validity 10000
+
+keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 4096 -validity 10000 -alias 
+
+export APP_VARIANT=dev && export APP_VERSION='1.0.1' && export APP_BUILD_NUMBER=3 && npx expo prebuild --yarn --platform all
+
+
+git clone https://itcarz@github.com/username/repository.git

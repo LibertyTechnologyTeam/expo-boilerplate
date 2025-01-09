@@ -1,0 +1,13 @@
+ENV["MATCH_PASSWORD"] = "Aa123@123"
+
+git_url("git@github.com:LibertyTechnologyTeam/fastlane-certificates.git")
+git_branch("influence")
+storage_mode("git")
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+app_identifier(["BUNDLE_ID.dev", "BUNDLE_ID.stg", "BUNDLE_ID"])
+team_id("APPLE_TEAM_ID")
+# force_for_new_devices(true)
+readonly(true)
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
+# The docs are available on https://docs.fastlane.tools/actions/match
