@@ -2,9 +2,9 @@ const prompts = require('prompts')
 const bundleIdPlugin = require('./bundle-id/plugin')
 const printSuccessPlugin = require('./printSuccess/plugin')
 const appleAuthPlugin = require('./apple-auth/plugin')
-
+const appNamePlugin = require('./app-name/plugin')
 // List of plugin to apply (ordered)
-const plugins = [bundleIdPlugin, appleAuthPlugin, printSuccessPlugin]
+const plugins = [appNamePlugin, bundleIdPlugin, appleAuthPlugin, printSuccessPlugin]
 
 /**
  * @typedef {Object} Plugin

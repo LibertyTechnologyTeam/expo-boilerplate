@@ -15,13 +15,13 @@ before_all do |lane, options|
     ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:b935357fdbb739e1b75034"
   elsif ENV["APP_VARIANT"] == "prd"
     ENV["ANDROID_APP_ID"] = "BUNDLE_ID"
-    ENV["IOS_APP_ID"] = "BUN"
-    ENV["ENV_PROFILE_NAME"] = "match AppStore BUN"
+    ENV["IOS_APP_ID"] = "BUNDLE_ID"
+    ENV["ENV_PROFILE_NAME"] = "match AppStore BUNDLE_ID"
     ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:527743bf151fce9cb75034"
   else
     ENV["ANDROID_APP_ID"] = "BUNDLE_ID.dev"
-    ENV["IOS_APP_ID"] = "BUN.dev"
-    ENV["ENV_PROFILE_NAME"] = "match AppStore BUN.dev"
+    ENV["IOS_APP_ID"] = "BUNDLE_ID.dev"
+    ENV["ENV_PROFILE_NAME"] = "match AppStore BUNDLE_ID.dev"
     ENV["ANDROID_MOBILESDK_APP_ID"] = "1:372489416669:android:abbf052e8339877db75034"
   end
 end
@@ -72,7 +72,7 @@ platform :ios do
       team_id: "APPLE_TEAM_ID",
       code_sign_identity: "iPhone Distribution",
       profile_name: ENV["ENV_PROFILE_NAME"],
-      targets: "InNews",
+      targets: "PROJECT_NAME",
     )
   end
 
