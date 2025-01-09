@@ -1,4 +1,4 @@
-const {cyan, blue, magenta} = require('chalk')
+const {cyan} = require('chalk')
 const gradient = require('gradient-string')
 
 const logo = [
@@ -35,16 +35,16 @@ module.exports = {
       middle: '#00cc00',
       end: '#009900'
     };
-    
+
     // Print logo with typing effect
     for (let i = 0; i < logo.length; i++) {
       process.stdout.write(gradient(colors.start, colors.end)(logo[i] + '\n'))
-      await sleep(200) // Adjust speed here
+      await sleep(120) // Adjust speed here
     }
 
     // Add shine effect
     for (let i = 0; i < 3; i++) {
-      await sleep(200)
+      await sleep(100)
       console.clear()
       logo.forEach((line, index) => {
         if (index === i * 2) {
