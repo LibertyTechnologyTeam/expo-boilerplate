@@ -127,7 +127,7 @@ platform :ios do
       reject_build_waiting_for_review: true,
       notify_external_testers: true,
       skip_waiting_for_build_processing: false,
-      api_key_path: ".github/data/key/deploy/innews/AuthKey_#{ENV["APP_VARIANT"]}.json",
+      api_key_path: ".github/data/key/deploy/project_name/AuthKey_#{ENV["APP_VARIANT"]}.json",
     )
   end
 end
@@ -211,7 +211,7 @@ platform :android do
   desc "Submit a new aab build to playstore beta"
   lane :deploy_aab do
     upload_to_play_store(
-      json_key: ".github/data/key/deploy/innews/PlayStoreKey_#{ENV["APP_VARIANT"]}.json",
+      json_key: ".github/data/key/deploy/project_name/PlayStoreKey_#{ENV["APP_VARIANT"]}.json",
       aab: "build/android/outputs/bundle/release/app-release.aab",
       timeout: 600,
       track: "internal", # beta, internal

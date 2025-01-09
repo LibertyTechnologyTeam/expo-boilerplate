@@ -18,6 +18,8 @@ module.exports = {
           if (fs.existsSync(configPath)) {
             let content = fs.readFileSync(configPath, 'utf8')
             content = content.replace(/PROJECT_NAME/g, projectName)
+            content = content.replace(/project_name/g, projectName.toLowerCase())
+
             fs.writeFileSync(configPath, content, 'utf8')
           }
         })
