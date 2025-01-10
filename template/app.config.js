@@ -1,5 +1,5 @@
 const env = process.env
-const variant = env.VARIANT
+const variant = env.VARIANT ?? 'dev'
 const isProd = variant === 'prod'
 const isStg = variant === 'stg'
 
@@ -25,8 +25,8 @@ const slug = {
 
 export default {
   expo: {
-    name: name[variant] ?? AppName,
-    slug: slug ?? AppName.toLowerCase(),
+    name: name[variant] ?? appName,
+    slug: slug ?? appName.toLowerCase(),
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',

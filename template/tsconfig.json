@@ -1,6 +1,21 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@constant/*": ["./src/constant/*"],
+      "@component/*": ["./src/component/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@screen/*": ["./src/screen/*"],
+      "@hook/*": ["./src/hook/*"],
+      "@locale/*": ["./src/locale/*"],
+      "@service/*": ["./src/service/*"],
+      "@type/*": ["./src/type/*"],
+      "@util/*": ["./src/util/*"],
+      "@api/*": ["./api/*"],
+      "@image/*": ["./src/assets/image/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }
