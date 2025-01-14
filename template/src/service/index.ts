@@ -1,2 +1,5 @@
 export {default as storage} from './storage'
 export * from './storage'
+export * from './notification'
+export * from './haptic'
+export * from './animation'

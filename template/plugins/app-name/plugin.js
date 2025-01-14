@@ -9,6 +9,7 @@ module.exports = {
     if (projectName) {
       const configPaths = [
         path.join(process.cwd(), 'app.config.js'),
+        path.join(process.cwd(), 'src', 'service', 'notification.ts'),
         path.join(process.cwd(), 'fastlane', 'Fastfile'),
         path.join(process.cwd(), 'fastlane', 'Matchfile'),
       ]

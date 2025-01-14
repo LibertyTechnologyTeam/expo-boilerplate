@@ -18,7 +18,9 @@ import {useLocale} from '@/hook'
 import {setLocale} from '@/locale'
 import Root from '@/navigation/Root'
 import {storage} from '@/service'
-import {tamaguiConfig} from '@/tamagui.config'
+
+import tamaguiConfig from './tamagui.config'
+import { Locale } from '@/types'
 
 LogBox.ignoreLogs(['Please pass alt prop to Image component'])
 LogBox.ignoreAllLogs()
@@ -68,8 +70,8 @@ function Bootstrap() {
   const bootstrap = async () => {
     try {
       if (!storage.getBoolean('OLD_USER')) {
-        const locale = getLocales()?.[0]?.languageCode
-        if (locale === 'km' || locale === 'zh') setLocale(locale)
+        const locale = getLocales()?.[0]?.languageCode ?? 'en'
+        if (locale !== 'en') setLocale(locale as Locale)
       }
     } catch (error) {
       // eslint-disable-next-line no-console

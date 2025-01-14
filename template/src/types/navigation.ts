@@ -1,6 +1,8 @@
 import {NavigationProp, RouteProp} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
 
+import {Route} from '@/navigation/Route'
+
 export type ScreenProps<T extends keyof StackList> = NativeStackScreenProps<StackList, T>
 
 export type RootStackScreenProps<T extends keyof StackList> = NativeStackScreenProps<StackList, T>
@@ -25,6 +27,13 @@ export type MainTabParamsType = {
   title: string
 }
 
-export type MainTabParamListType = {}
+export type MainTabParamListType = {
+  [Route.Home]?: MainTabParamsType
+  [Route.Profile]?: MainTabParamsType
+  [Route.Menu]?: MainTabParamsType
+}
 
-export type StackList = {}
+export type StackList = {
+  [key: string]: any
+  [Route.Main]: MainTabParamListType | {screen?: keyof MainTabParamListType}
+}

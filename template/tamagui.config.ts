@@ -1,8 +1,8 @@
 import {config, fonts} from '@tamagui/config/v3'
 import {createTamagui} from '@tamagui/core'
 
-import {fontSize as fontSizeEnum} from './src/theme/size'
-import {themes} from './src/theme/theme-builder'
+import {fontSize as fontSizeEnum} from './src/theme'
+import * as themes from './src/theme/tamagui'
 
 // Convert enum to object
 const fontSize: any = Object.fromEntries(
@@ -11,7 +11,6 @@ const fontSize: any = Object.fromEntries(
 
 export const tamaguiConfig = createTamagui({
   ...config,
-
   // font
   fonts,
 
