@@ -4,7 +4,7 @@ const isProd = variant === 'prod'
 const isStg = variant === 'stg'
 
 const name = 'PROJECT_NAME'
-const bundleId = 'BUNDLE_ID'
+const bundleId = 'BUNDLE.ID'
 
 const bundleSuffix = isProd ? '' : `.${variant}`
 const bundleIdentifier = `${bundleId}${bundleSuffix}`
@@ -15,8 +15,6 @@ const appName = {
   dev: `[D]${name}`,
 }
 
-
-
 const slug = {
   prod: name.toLowerCase(),
   stg: `${name}-stg`,
@@ -25,11 +23,12 @@ const slug = {
 
 export default {
   expo: {
-    name: name[variant] ?? appName,
-    slug: slug ?? appName.toLowerCase(),
+    name,
+    slug: slug[variant] ?? appName.toLowerCase(),
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
+    scheme: name,
     userInterfaceStyle: 'light',
     newArchEnabled: true,
     splash: {
@@ -44,6 +43,7 @@ export default {
       infoPlist: {
         CFBundleDisplayName: appName,
       },
+      googleServicesFile: `./config/google/GoogleService-Info-${variant}.plist`,
     },
     android: {
       adaptiveIcon: {
@@ -51,6 +51,11 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: bundleId,
+      googleServicesFile: `./config/google/google-services-${variant}.json`,
+      lintOptions: {
+        abortOnError: false,
+        disable: ['Deprecation', 'Unchecked'],
+      },
     },
     plugins: [
       'expo-localization',
@@ -76,7 +81,10 @@ export default {
               disable: ['Deprecation', 'Unchecked'],
             },
           },
-          ios: {},
+          ios: {
+            deploymentTarget: '15.6',
+            useFrameworks: 'static',
+          },
         },
       ],
     ],

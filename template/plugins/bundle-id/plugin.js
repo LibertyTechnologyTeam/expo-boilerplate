@@ -15,7 +15,7 @@ module.exports = {
         configPaths.forEach(configPath => {
           if (fs.existsSync(configPath)) {
             let content = fs.readFileSync(configPath, 'utf8')
-            content = content.replace(/BUNDLE_ID/g, value)
+            content = content.replace(/BUNDLE.ID/g, value)
             fs.writeFileSync(configPath, content, 'utf8')
           }
         })
