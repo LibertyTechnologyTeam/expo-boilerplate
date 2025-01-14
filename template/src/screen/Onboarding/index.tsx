@@ -1,7 +1,12 @@
 import React from 'react'
 
-import {View} from '@tamagui/core'
+import {Button, Container, Text} from '@/component'
 
 export default function Onboarding() {
-  return <View bg={'$background'} flex={1}></View>
+  return (
+    <Container>
+      <Container />
+      <Button>Next</Button>
+    </Container>
+  )
 }
