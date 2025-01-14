@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native'
 
 import {TextProps, View, ViewProps} from '@tamagui/core'
 
-import {fontSize, space} from '@/themes/size'
+import {fontSize, space} from '@/theme'
 
 import {Icon, IconProps} from '../Icon'
 import {HStack} from '../Stack'

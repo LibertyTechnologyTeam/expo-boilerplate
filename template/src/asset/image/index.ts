@@ -1,1 +1,3 @@
-export const images = {}
+export const images = {
+  placeholder: require('./placeholder.png'),
+}

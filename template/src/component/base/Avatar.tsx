@@ -1,7 +1,7 @@
 import React from 'react'
 
-import images from '@/assets/images'
-import {size as Size} from '@/themes/size'
+import {images} from '@/asset'
+import {size as Size} from '@/theme'
 
 import {Image, ImageProps} from './Image'
 
@@ -10,7 +10,7 @@ interface AvatarProps extends ImageProps {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const {size = '$5.75', placeholder = images['avatar-default']} = props
+  const {size = '$5.75', placeholder = images.placeholder} = props
 
   return (
     <Image

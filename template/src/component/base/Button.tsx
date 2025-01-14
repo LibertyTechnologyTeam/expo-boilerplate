@@ -1,9 +1,9 @@
-import {GestureResponderEvent, TouchableOpacity} from 'react-native'
+import {GestureResponderEvent} from 'react-native'
 
 import {GetProps, styled, Text, TextProps, View} from '@tamagui/core'
 
-import {onHaptic} from '@/services'
-import {fontSize} from '@/themes/size'
+import {onHaptic} from '@/service'
+import {fontSize} from '@/theme'
 
 import {Pressable} from './Pressable'
 

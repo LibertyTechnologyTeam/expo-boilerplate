@@ -2,7 +2,7 @@ import React from 'react'
 
 import {FontLanguage, GetProps, styled, Text as TamaguiText} from '@tamagui/core'
 
-import {fontSize} from '@/themes/size'
+import {fontSize} from '@/theme'
 import {Locale} from '@/types'
 
 const RNText = styled(TamaguiText, {

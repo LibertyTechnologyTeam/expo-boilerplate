@@ -5,8 +5,7 @@ import {ActivityIndicator} from 'react-native'
 import {FlashList, FlashListProps} from '@shopify/flash-list'
 import {FadeIn, FadeOut} from 'react-native-reanimated'
 
-import {translate} from '@/locales'
-import {tracking, TrackingEventNameType} from '@/utils/TrackingLogSystem'
+import {translate} from '@/locale'
 
 import {AnimatedView} from './Layout'
 import {HStack} from './Stack'
@@ -16,21 +15,18 @@ export interface ListProps extends FlashListProps<any> {
   itemKey?: 'id' | string
   loadMore?: boolean
   networkConnected?: boolean
-  eventName?: TrackingEventNameType
   logAfterNLoads?: number
 }
 
 type ListRef = LegacyRef<any> | undefined
 
 export const List = forwardRef<FlashList<any>, ListProps>((props, ref?: ListRef) => {
-  const {itemKey, eventName,logAfterNLoads, loadMore} = props
+  const {itemKey, loadMore} = props
   const countLoadMore = useRef(0)
-  
+
   const onEndReached = () => {
     props?.onEndReached?.()
-    if (eventName && countLoadMore.current === logAfterNLoads) {
-      tracking.log(eventName)
-    }
+
     countLoadMore.current += 1
   }
   return (

@@ -6,7 +6,7 @@ import type {ImageRequireSource} from 'react-native'
 import {styled, ViewProps} from '@tamagui/core'
 import {Image as ExpoImage, ImageProps as ExpoImageProps, ImageSource} from 'expo-image'
 
-import images from '@/assets/images'
+import {images} from '@/asset'
 
 type Source = ImageRequireSource | string | ImageSource | ImageSourcePropType
 

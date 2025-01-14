@@ -12,7 +12,7 @@ import {
 import {BottomSheetTextInput} from '@gorhom/bottom-sheet'
 import {GetProps, styled, View} from '@tamagui/core'
 
-import {fontSize} from '@/themes/size'
+import {fontSize} from '@/theme'
 
 import {Icon, IconName, IconProps} from './Icon'
 import {Pressable} from './Pressable'

@@ -32,9 +32,9 @@ if (IS_ANDROID && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
-if (__DEV__) {
-  require('./ReactotronConfig')
-}
+// if (__DEV__) {
+//   require('./ReactotronConfig')
+// }
 
 export default function RootLayout() {
   const colorScheme = useColorScheme()
