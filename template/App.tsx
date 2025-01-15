@@ -27,6 +27,10 @@ LogBox.ignoreAllLogs()
 
 dayjs.extend(relativeTime)
 SplashScreen.preventAutoHideAsync()
+SplashScreen.setOptions({
+  fade: true,
+  duration: 250,
+})
 
 if (IS_ANDROID && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)

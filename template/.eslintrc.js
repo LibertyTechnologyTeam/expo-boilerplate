@@ -21,14 +21,14 @@ module.exports = {
     '**/node_modules/**',
     'package.json',
     'yarn.lock',
-    'ios/**',
-    'android/**',
-    'assets/**',
+    '**/ios/**',
+    '**/android/**',
+    '**/assets/**',
     '.vscode',
     '.expo-shared',
     '.prettirrc',
     '.eslintrc.js',
-    '/expo',
+    '**/expo/**',
   ],
 
   rules: {
@@ -125,7 +125,6 @@ module.exports = {
     'react/jsx-no-useless-fragment': 'off',
     'implicit-arrow-linebreak': 'off',
     '@typescript-eslint/require-await': 'off',
-    '@typescript-eslint/no-unused-vars': 1,
     '@typescript-eslint/no-useless-constructor': 'off',
     'no-return-assign': 'off',
     'no-plusplus': 'off',
@@ -143,7 +142,6 @@ module.exports = {
     'no-promise-executor-return': 'off',
     'react/destructuring-assignment': 'off',
     'no-await-in-loop': 'off',
-    'no-unused-vars': 1,
     'prettier/prettier': [
       'off',
       {
@@ -161,5 +159,17 @@ module.exports = {
       },
     ],
     'react/no-children-prop': 'off',
+
+    'no-unused-vars': 2, // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
 }

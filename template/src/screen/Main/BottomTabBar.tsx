@@ -3,7 +3,7 @@ import React, {memo} from 'react'
 import {ColorSchemeName, StyleSheet, TouchableOpacity, useColorScheme} from 'react-native'
 
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs'
-import {ColorTokens, View} from '@tamagui/core'
+import {View} from '@tamagui/core'
 import * as NavigationBar from 'expo-navigation-bar'
 
 import {HStack, Icon, Text} from '@/component'
@@ -44,7 +44,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
           const title = (params as any)?.title
 
           const isFocused = state.index === index
-          const color: ColorTokens = isFocused ? '$accentColor' : '$mauve10'
+          const color = isFocused ? '$accentColor' : '$mauve10'
 
           const onLongPress = () => {
             navigation.emit({
@@ -80,7 +80,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
               onPress={onPress}
               onLongPress={onLongPress}
               style={style.tabItem}>
-              {/* <Icon name={icon} color={color} size={'$1.5'} /> */}
+              <Icon name={icon} color={color} size={'$1.5'} />
               <Text
                 numberOfLines={1}
                 adjustsFontSizeToFit

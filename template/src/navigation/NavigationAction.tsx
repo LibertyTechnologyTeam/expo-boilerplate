@@ -17,10 +17,9 @@ const parseRoute = (route: any): {name: string; enabled: boolean} => {
 
 const navigationRef = createNavigationContainerRef<StackList>()
 
-const navigate = <RouteName extends keyof typeof Route>(
-  name: RouteName,
-  params?: StackList[RouteName]
-): void => {
+type RouteName = keyof typeof Route
+
+const navigate = (name: RouteName, params?: StackList[RouteName]): void => {
   if (navigationRef.isReady()) {
     navigationRef.navigate(name as any, params)
   }
@@ -50,18 +49,12 @@ const getPrevScreenName = () => {
   return route?.name ?? ''
 }
 
-const push = <RouteName extends keyof StackList>(
-  route: RouteName,
-  params?: StackList[RouteName]
-): void => {
+const push = (route: RouteName, params?: StackList[RouteName]): void => {
   const {name, enabled} = parseRoute(route)
   if (enabled) navigationRef?.dispatch(StackActions.push(name, params))
 }
 
-const replace = <RouteName extends keyof StackList>(
-  route: RouteName,
-  params?: StackList[RouteName]
-): void => {
+const replace = (route: RouteName, params?: StackList[RouteName]): void => {
   const {name, enabled} = parseRoute(route)
   if (enabled) navigationRef?.dispatch(StackActions.replace(name, params))
 }
