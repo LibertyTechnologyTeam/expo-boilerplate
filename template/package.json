@@ -22,7 +22,7 @@
     "theme": "tamagui generate-themes ./src/theme/theme-builder.ts ./src/theme/tamagui.ts",
     "prettier": "prettier --write --cache --cache-location .cache/.prettier-cache src --log-level silent",
     "cs": "node create_screen.js",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.6",

@@ -1,17 +1,18 @@
 import React, {memo} from 'react'
 
-import {ColorSchemeName, StyleSheet, TouchableOpacity, useColorScheme} from 'react-native'
+import {StyleSheet, TouchableOpacity, useColorScheme} from 'react-native'
 
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs'
-import {View} from '@tamagui/core'
+import {ColorTokens, View} from '@tamagui/core'
 import * as NavigationBar from 'expo-navigation-bar'
 
+import {IS_ANDROID} from '@/common'
 import {HStack, Icon, Text} from '@/component'
 import {useDidMountEffect, useTranslate} from '@/hook'
 import {onHaptic, RNLayoutAnimation} from '@/service'
-import {insets} from '@/theme'
+import {colors, insets} from '@/theme'
 
-export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps) => {
+export const BottomTabBar = memo(({state, descriptors, navigation}: BottomTabBarProps) => {
   const translate = useTranslate()
   const theme = useColorScheme()
 
@@ -19,13 +20,15 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
   const themeColor = isVideo ? 'dark' : theme
 
   useDidMountEffect(() => {
-    if (themeColor === 'dark') {
-      NavigationBar.setBackgroundColorAsync('hsla(0, 15%, 10%, 1)')
-      NavigationBar.setButtonStyleAsync('light')
-      NavigationBar.setPositionAsync('absolute')
-    } else {
-      NavigationBar.setBackgroundColorAsync('hsla(0, 15%, 99%, 1)')
-      NavigationBar.setButtonStyleAsync('dark')
+    if (IS_ANDROID) {
+      if (themeColor === 'dark') {
+        NavigationBar.setBackgroundColorAsync('hsla(0, 15%, 10%, 1)')
+        NavigationBar.setButtonStyleAsync('light')
+        NavigationBar.setPositionAsync('absolute')
+      } else {
+        NavigationBar.setBackgroundColorAsync('hsla(0, 15%, 99%, 1)')
+        NavigationBar.setButtonStyleAsync('dark')
+      }
     }
   }, [themeColor])
 
@@ -34,7 +37,10 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
       bg="$background"
       theme={themeColor}
       borderTopWidth={1}
-      borderTopColor="$mauve4"
+      $theme-dark={{
+        borderTopColor: colors.grayDark.gray7,
+      }}
+      borderTopColor={colors.gray.gray7}
       pb={insets.bottom}>
       <HStack alignItems="flex-start" paddingTop="$2">
         {state.routes.map((route, index) => {
@@ -44,7 +50,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
           const title = (params as any)?.title
 
           const isFocused = state.index === index
-          const color = isFocused ? '$accentColor' : '$mauve10'
+          const color = (isFocused ? '$accentColor' : '$color12') as ColorTokens
 
           const onLongPress = () => {
             navigation.emit({
@@ -87,7 +93,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
                 fontSize="$xs"
                 width="100%"
                 textAlign="center"
-                color={isFocused ? '$accentColor' : '$mauve10'}
+                color={color}
                 fontWeight={isFocused ? '500' : '400'}>
                 {translate(title)}
               </Text>
@@ -97,7 +103,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
       </HStack>
     </View>
   )
-}
+})
 
 const style = StyleSheet.create({
   tabItem: {

@@ -103,7 +103,7 @@ module.exports = {
     camelcase: 0,
     'jest/no-identical-title': 0,
     'jest/valid-expect': 0,
-    'prefer-destructuring': 2,
+    'prefer-destructuring': 0,
     'no-nested-ternary': 0,
     'react/display-name': 0,
     '@typescript-eslint/no-unsafe-assignment': 'off',
@@ -179,5 +179,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+
+    '@typescript-eslint/no-empty-object-type': 'off',
   },
 }

@@ -2,15 +2,15 @@ import React from 'react'
 
 import {BottomTabHeaderProps, createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
-import {HStack, Image, Text} from '@/component'
+import {HStack, Text} from '@/component'
 import {translate, TxKeyPath} from '@/locale'
-import {navigation} from '@/navigation'
 import {Route} from '@/navigation/Route'
 import {insets} from '@/theme'
 import {MainTabParamListType, MainTabParamsType} from '@/types'
 
 import Home from '../Home'
-import Menu from '../Menu'
+import Profile from '../Profile'
+import Wallet from '../Wallet'
 
 import {BottomTabBar} from './BottomTabBar'
 
@@ -22,11 +22,10 @@ const MainTab = () => {
       screenOptions={{
         header: NavigationTab,
       }}
-      tabBar={props => <BottomTabBar {...props} />}
-      >
+      tabBar={props => <BottomTabBar {...props} />}>
       <Screen
         initialParams={{
-          icon: 'home',
+          icon: 'home-simple',
           title: 'Home',
         }}
         name={Route.Home}
@@ -35,11 +34,20 @@ const MainTab = () => {
 
       <Screen
         initialParams={{
-          icon: 'menu-list',
-          title: 'Menu',
+          icon: 'wallet',
+          title: 'Wallet',
         }}
-        name={Route.Menu}
-        component={Menu}
+        name={Route.Wallet}
+        component={Wallet}
+      />
+
+      <Screen
+        initialParams={{
+          icon: 'user-circle',
+          title: 'Profile',
+        }}
+        name={Route.Profile}
+        component={Profile}
       />
     </Navigator>
   )

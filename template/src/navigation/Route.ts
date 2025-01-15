@@ -4,4 +4,5 @@ export enum Route {
   Home = 'Home',
   Profile = 'Profile',
   Menu = 'Menu',
+  Wallet = 'Wallet',
 }

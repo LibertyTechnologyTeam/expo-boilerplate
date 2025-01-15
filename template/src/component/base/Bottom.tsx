@@ -1,7 +1,8 @@
 import React from 'react'
 
-import {StyleSheet, View, ViewProps} from 'react-native'
+import {StyleSheet, ViewProps} from 'react-native'
 
+import {View} from '@tamagui/core'
 import {useReanimatedKeyboardAnimation} from 'react-native-keyboard-controller'
 import Animated, {Extrapolation, interpolate, useAnimatedStyle} from 'react-native-reanimated'
 
@@ -18,7 +19,12 @@ export interface BottomViewProps extends ViewProps {
 export const Bottom = (props: BottomViewProps) => {
   const {avoidKeyboard} = props
   return (
-    <View style={[style.container, props?.style]}>
+    <View
+      style={[style.container, props?.style]}
+      $theme-dark={{
+        borderTopColor: colors.grayDark.gray7,
+      }}
+      borderTopColor={colors.gray.gray7}>
       {avoidKeyboard ? (
         <AvoidKeyboardView>
           <BottomView {...props} />
@@ -31,7 +37,9 @@ export const Bottom = (props: BottomViewProps) => {
   )
 }
 
-interface AvoidKeyboardView extends ViewProps {}
+interface AvoidKeyboardView extends ViewProps {
+  //
+}
 
 const AvoidKeyboardView = ({children}: AvoidKeyboardView) => {
   const {height, progress} = useReanimatedKeyboardAnimation()
@@ -66,7 +74,6 @@ const BottomView = (props: BottomViewProps) => {
 const style = StyleSheet.create({
   container: {
     borderTopWidth: 1,
-    borderColor: colors.mauve.mauve4
   },
   bottomView: {
     paddingHorizontal: space['$3.5'],

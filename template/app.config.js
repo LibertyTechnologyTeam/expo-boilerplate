@@ -29,7 +29,7 @@ export default {
     orientation: 'portrait',
     icon: './assets/icon.png',
     scheme: name,
-    userInterfaceStyle: 'light',
+    userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     splash: {
       image: './assets/splash-icon.png',
