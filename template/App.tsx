@@ -5,7 +5,7 @@ import {LogBox, UIManager, useColorScheme} from 'react-native'
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet'
 import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native'
 import {FontLanguage, TamaguiProvider, Theme} from '@tamagui/core'
-import dayjs from 'dayjs'
+import {extend} from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {getLocales} from 'expo-localization'
 import * as SplashScreen from 'expo-splash-screen'
@@ -25,7 +25,8 @@ import tamaguiConfig from './tamagui.config'
 LogBox.ignoreLogs(['Please pass alt prop to Image component'])
 LogBox.ignoreAllLogs()
 
-dayjs.extend(relativeTime)
+extend(relativeTime)
+
 SplashScreen.preventAutoHideAsync()
 SplashScreen.setOptions({
   fade: true,

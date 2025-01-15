@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {CommonActions, createNavigationContainerRef, StackActions} from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import {RouteType, StackList, StackNavigation, StackRoute} from '@/types'
+import {StackList, StackRoute} from '@/types'
 
 import {Route} from './Route'
 
@@ -83,5 +81,3 @@ export const navigation = {
   getPrevScreenName,
   getCurrentScreenName,
 }
-
-export const {Screen, Navigator, Group} = createNativeStackNavigator<StackList>()

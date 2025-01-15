@@ -46,7 +46,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
       return <Title {...titleProps}>{props?.title}</Title>
     }
 
-    if(CenterItem) return CenterItem({color: ''})
+    if (CenterItem) return CenterItem({color: ''})
   }
   return (
     <HStack bg="$background" gap="$3.5" pt={insets.paddingTop} pb="$3.5" px="$3.5">
@@ -55,7 +55,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
       ) : !hideBack ? (
         <View flex={2}>
           <Pressable onPress={onBack} hitSlop={space.$2}>
-            <Icon name="chevron-left" size="$2" color="$mauve12" />
+            <Icon name="nav-arrow-left" size="$2" color="$mauve12" />
           </Pressable>
         </View>
       ) : (

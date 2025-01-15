@@ -1,8 +1,9 @@
 import React from 'react'
 
+import {View} from '@tamagui/core'
+
 import {Bottom, Button, Container} from '@/component'
 import {navigation} from '@/navigation'
-import { View } from '@tamagui/core'
 
 export default function Onboarding() {
   const onNext = () => {
@@ -11,9 +12,7 @@ export default function Onboarding() {
 
   return (
     <Container>
-      <View flex={1}>
-
-      </View>
+      <View flex={1}></View>
       <Bottom>
         <Button onPress={onNext}>Next</Button>
       </Bottom>

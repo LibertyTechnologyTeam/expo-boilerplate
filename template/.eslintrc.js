@@ -16,9 +16,9 @@ module.exports = {
     '@typescript-eslint',
     'unused-imports',
   ],
-
   ignorePatterns: [
-    '**/node_modules/**',
+    '/dist/*',
+    'node_modules/**',
     'package.json',
     'yarn.lock',
     '**/ios/**',
@@ -28,8 +28,16 @@ module.exports = {
     '.expo-shared',
     '.prettirrc',
     '.eslintrc.js',
-    '**/expo/**',
   ],
+
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: '**/tsconfig.json',
+        alwaysTryTypes: true,
+      },
+    },
+  },
 
   rules: {
     'import/order': [
@@ -160,8 +168,8 @@ module.exports = {
     ],
     'react/no-children-prop': 'off',
 
-    'no-unused-vars': 2, // or "@typescript-eslint/no-unused-vars": "off",
-    'unused-imports/no-unused-imports': 'error',
+    '@typescript-eslint/no-unused-vars': 1, // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'off',
     'unused-imports/no-unused-vars': [
       'warn',
       {

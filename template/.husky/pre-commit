@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+# Include husky script
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Update PATH
+export PATH="/usr/local/bin:$PATH"
+
+# Get list of staged files
+STASH_FILE_LIST=$(git diff --name-only --cached)
+STASH_FILE_LIST=(${STASH_FILE_LIST// /})
+
+echo "Validate running..."
+
+# Prettify staged files
+for file_will_commit in "${STASH_FILE_LIST[@]}"; do
+  echo "$file_will_commit"
+  if [[ "$file_will_commit" =~ ^src.*.(tsx|ts|js)$ ]]; then
+    if [ -f "$file_will_commit" ]; then
+      npx --silent eslint "$file_will_commit" --fix --cache --cache-location .cache/.eslint-cache &&
+      npx --silent prettier --write "$file_will_commit" --cache --cache-location .cache/.prettier-cache --log-level silent &&
+      git add "$file_will_commit" ||
+      exit 1
+    fi
+  fi
+done
+
+echo "Validate Done!!!"
+exit 0
