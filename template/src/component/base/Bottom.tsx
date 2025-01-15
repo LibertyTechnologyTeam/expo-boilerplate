@@ -5,22 +5,26 @@ import {StyleSheet, View, ViewProps} from 'react-native'
 import {useReanimatedKeyboardAnimation} from 'react-native-keyboard-controller'
 import Animated, {Extrapolation, interpolate, useAnimatedStyle} from 'react-native-reanimated'
 
-import {insets, space} from '@/theme'
+import {colors, insets, space} from '@/theme'
 
 export interface BottomViewProps extends ViewProps {
+  /**
+   * When true, the bottom view will automatically adjust its position
+   * to avoid being covered by the keyboard when it appears
+   */
   avoidKeyboard?: boolean
 }
 
-export const BottomView = (props: BottomViewProps) => {
+export const Bottom = (props: BottomViewProps) => {
   const {avoidKeyboard} = props
   return (
     <View style={[style.container, props?.style]}>
       {avoidKeyboard ? (
         <AvoidKeyboardView>
-          <Bottom {...props} />
+          <BottomView {...props} />
         </AvoidKeyboardView>
       ) : (
-        <Bottom {...props} />
+        <BottomView {...props} />
       )}
       <View style={{height: insets.bottom}} />
     </View>
@@ -47,19 +51,10 @@ const AvoidKeyboardView = ({children}: AvoidKeyboardView) => {
     }
   })
 
-  // const spacingAnimated = useAnimatedStyle(() => {
-  //   const height = interpolate(progress.value, [0, 1], [0, space.md], {
-  //     extrapolateRight: Extrapolation.CLAMP,
-  //   })
-  //   return {
-  //     height,
-  //   }
-  // })
-
   return <Animated.View style={[style.container, animatedStyle]}>{children}</Animated.View>
 }
 
-const Bottom = (props: BottomViewProps) => {
+const BottomView = (props: BottomViewProps) => {
   const {children} = props
   return (
     <View {...props} style={[style.bottomView, props.style]}>
@@ -70,11 +65,8 @@ const Bottom = (props: BottomViewProps) => {
 
 const style = StyleSheet.create({
   container: {
-    shadowOpacity: 0.04,
-
-    borderTopLeftRadius: space['$3.5'],
-    borderTopRightRadius: space['$3.5'],
     borderTopWidth: 1,
+    borderColor: colors.mauve.mauve4
   },
   bottomView: {
     paddingHorizontal: space['$3.5'],

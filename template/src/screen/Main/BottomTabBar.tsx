@@ -80,7 +80,7 @@ export const BottomTabBar = ({state, descriptors, navigation}: BottomTabBarProps
               onPress={onPress}
               onLongPress={onLongPress}
               style={style.tabItem}>
-              <Icon name={icon} color={color} size={'$1.5'} />
+              {/* <Icon name={icon} color={color} size={'$1.5'} /> */}
               <Text
                 numberOfLines={1}
                 adjustsFontSizeToFit

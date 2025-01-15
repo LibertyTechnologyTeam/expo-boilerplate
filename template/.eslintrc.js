@@ -143,6 +143,7 @@ module.exports = {
     'no-promise-executor-return': 'off',
     'react/destructuring-assignment': 'off',
     'no-await-in-loop': 'off',
+    'no-unused-vars': 1,
     'prettier/prettier': [
       'off',
       {

@@ -1,12 +1,19 @@
 import React from 'react'
 
-import {Button, Container, Text} from '@/component'
+import {Bottom, Button, Container} from '@/component'
+import {navigation} from '@/navigation'
 
 export default function Onboarding() {
+  const onNext = () => {
+    navigation.navigate('Main')
+  }
+
   return (
     <Container>
-      <Container />
-      <Button>Next</Button>
+      
+      <Bottom>
+        <Button onPress={onNext}>Next</Button>
+      </Bottom>
     </Container>
   )
 }

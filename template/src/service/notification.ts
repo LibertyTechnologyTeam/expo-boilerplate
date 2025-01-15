@@ -103,4 +103,4 @@ const initialized = async () => {
 // Listen for messages when the app is in the foreground.
 const onMessage = messaging().onMessage(remoteData => display(remoteData))
 
-export {request, refresh, initialized, display, onMessage}
+export default {request, refresh, initialized, display, onMessage}

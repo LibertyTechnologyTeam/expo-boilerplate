@@ -2,7 +2,7 @@
 import {CommonActions, createNavigationContainerRef, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import {StackList} from '@/types'
+import {RouteType, StackList, StackNavigation, StackRoute} from '@/types'
 
 import {Route} from './Route'
 
@@ -17,7 +17,7 @@ const parseRoute = (route: any): {name: string; enabled: boolean} => {
 
 const navigationRef = createNavigationContainerRef<StackList>()
 
-const navigate = <RouteName extends keyof StackList>(
+const navigate = <RouteName extends keyof typeof Route>(
   name: RouteName,
   params?: StackList[RouteName]
 ): void => {
@@ -73,10 +73,10 @@ const pop = (step: number) => {
   navigationRef?.dispatch(popAction)
 }
 
-export const getRoute = (): any => {
+export const getRoute = (): StackRoute | boolean => {
   if (!navigationRef?.isReady()) return false
 
-  return navigationRef?.getCurrentRoute()
+  return navigationRef?.getCurrentRoute() as StackRoute
 }
 
 export const navigation = {

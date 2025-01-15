@@ -22,7 +22,8 @@ const MainTab = () => {
       screenOptions={{
         header: NavigationTab,
       }}
-      tabBar={props => <BottomTabBar {...props} />}>
+      tabBar={props => <BottomTabBar {...props} />}
+      >
       <Screen
         initialParams={{
           icon: 'home',

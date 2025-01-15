@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {enableScreens} from 'react-native-screens'
@@ -26,15 +26,10 @@ export default function MainNavigator() {
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
-      }}
-      screenListeners={{
-        state: _ => {
-          // TODO: Tracking Screen
-        },
       }}>
+      <Screen name={Route.Onboarding} component={Onboarding} />
       <Screen name={Route.Main} component={MainTab} />
       <Screen name={Route.Home} component={Home} />
-      <Screen name={Route.Onboarding} component={Onboarding} />
       {/* <HeaderGroup /> */}
     </Navigator>
   )

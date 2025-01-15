@@ -18,9 +18,9 @@ import {useLocale} from '@/hook'
 import {setLocale} from '@/locale'
 import Root from '@/navigation/Root'
 import {storage} from '@/service'
+import {Locale} from '@/types'
 
 import tamaguiConfig from './tamagui.config'
-import { Locale } from '@/types'
 
 LogBox.ignoreLogs(['Please pass alt prop to Image component'])
 LogBox.ignoreAllLogs()
@@ -31,10 +31,6 @@ SplashScreen.preventAutoHideAsync()
 if (IS_ANDROID && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
-
-// if (__DEV__) {
-//   require('./ReactotronConfig')
-// }
 
 export default function RootLayout() {
   const colorScheme = useColorScheme()
