@@ -81,7 +81,7 @@ const ButtonText = styled(Text, {
   adjustsFontSizeToFit: true,
   textTransform: 'uppercase',
   fontWeight: '700',
-  color: '$white1',
+  color: '$black',
   lineHeight: 17,
   variants: {
     type: {

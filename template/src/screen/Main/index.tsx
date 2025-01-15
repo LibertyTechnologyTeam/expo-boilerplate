@@ -66,7 +66,7 @@ const NavigationTab = ({route: {params}}: BottomTabHeaderProps) => {
       px={'$3.5'}
       pb={'$3.5'}
       gap={'$3'}>
-      <Text fontWeight="700" textAlign="right" color="$accentColor" fontSize={'$3xl'}>
+      <Text fontWeight="bold" textAlign="right" fontSize={'$3xl'}>
         {translate(title as TxKeyPath)}
       </Text>
     </HStack>

@@ -167,6 +167,7 @@ module.exports = {
       },
     ],
     'react/no-children-prop': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
 
     '@typescript-eslint/no-unused-vars': 1, // or "@typescript-eslint/no-unused-vars": "off",
     'unused-imports/no-unused-imports': 'off',

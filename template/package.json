@@ -68,6 +68,7 @@
     "react-native-mmkv": "^3.2.0",
     "react-native-nitro-haptics": "^0.0.1",
     "react-native-reanimated": "~3.16.1",
+    "react-native-reanimated-carousel": "^3.5.1",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.5.0",
     "react-native-static-safe-area-insets": "https://github.com/mainguyen12/react-native-static-safe-area-insets.git#62d76a2acdb572dd6aa968d51c701a510c858d7e",
